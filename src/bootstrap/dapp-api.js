@@ -23,34 +23,15 @@ const ETHWeb3 = new Web3(
   new Web3.providers.HttpProvider(ETHEREUM_ETHEREUM_PROVIDER_URL)
 )
 
-let ARBITRABLE_ADDRESSES = []
-let T2CR_ADDRESS
-let ERC20_ADDRESS
-let STABLECOIN_ADDRESS
-let ARBITRABLE_TOKEN_ADDRESSES = []
-let TOKENS_VIEW_ADDRESS
-web3.eth.net.getId().then((networkID) => {
-  let networkName
-  switch (networkID) {
-    case 1:
-      networkName = 'MAINNET'
-      break
-    case 42:
-      networkName = 'KOVAN'
-      break
-    default:
-      break
-  }
-
-  ARBITRABLE_ADDRESSES =
-    _addresses[`${networkName}_MULTIPLE_ARBITRABLE_TRANSACTION_ADDRESSES`]
-  ARBITRABLE_TOKEN_ADDRESSES =
-    _addresses[`${networkName}_MULTIPLE_ARBITRABLE_TOKEN_TRANSACTION_ADDRESSES`]
-  T2CR_ADDRESS = _addresses[`${networkName}_T2CR_ADDRESS`]
-  ERC20_ADDRESS = _addresses[`${networkName}_ERC20_BADGE_ADDRESS`]
-  STABLECOIN_ADDRESS = _addresses[`${networkName}_STABLECOIN_BADGE_ADDRESS`]
-  TOKENS_VIEW_ADDRESS = _addresses[`${networkName}_TOKENS_VIEW_ADDRESS`]
-})
+const networkName = 'MAINNET'
+const ARBITRABLE_ADDRESSES =
+  _addresses[`${networkName}_MULTIPLE_ARBITRABLE_TRANSACTION_ADDRESSES`]
+const ARBITRABLE_TOKEN_ADDRESSES =
+  _addresses[`${networkName}_MULTIPLE_ARBITRABLE_TOKEN_TRANSACTION_ADDRESSES`]
+const T2CR_ADDRESS = _addresses[`${networkName}_T2CR_ADDRESS`]
+const ERC20_ADDRESS = _addresses[`${networkName}_ERC20_BADGE_ADDRESS`]
+const STABLECOIN_ADDRESS = _addresses[`${networkName}_STABLECOIN_BADGE_ADDRESS`]
+const TOKENS_VIEW_ADDRESS = _addresses[`${networkName}_TOKENS_VIEW_ADDRESS`]
 
 const archon = new Archon(web3.currentProvider, 'https://ipfs.kleros.io')
 
