@@ -7,6 +7,7 @@ import ArbitrableTokenList from '@kleros/kleros-interaction/build/contracts/Arbi
 
 import {
   web3,
+  ETHWeb3,
   archon,
   ERC20_ADDRESS,
   T2CR_ADDRESS,
@@ -151,12 +152,12 @@ function* fetchMetaEvidence({ type, payload: { metaEvidenceIPFSHash } }) {
     } else {
       const _token = metaEvidenceDecoded.token
       // Tokens
-      const ERC20BadgeInstance = new web3.eth.Contract(
+      const ERC20BadgeInstance = new ETHWeb3.eth.Contract(
         ArbitrableAddressList.abi,
         ERC20_ADDRESS
       )
 
-      const T2CRInstance = new web3.eth.Contract(
+      const T2CRInstance = new ETHWeb3.eth.Contract(
         ArbitrableTokenList.abi,
         T2CR_ADDRESS
       )
@@ -588,12 +589,12 @@ function* fetchArbitrabletx({ payload: { arbitrable, id } }) {
     } else {
       const _token = metaEvidenceArchon.metaEvidenceJSON.token
       // Tokens
-      const ERC20BadgeInstance = new web3.eth.Contract(
+      const ERC20BadgeInstance = new ETHWeb3.eth.Contract(
         ArbitrableAddressList.abi,
         ERC20_ADDRESS
       )
 
-      const T2CRInstance = new web3.eth.Contract(
+      const T2CRInstance = new ETHWeb3.eth.Contract(
         ArbitrableTokenList.abi,
         T2CR_ADDRESS
       )

@@ -13,7 +13,6 @@ import Footer from '../components/footer'
 import Notifications from '../containers/settings'
 import { ReactComponent as Kleros } from '../assets/kleros.svg'
 import { ReactComponent as Transaction } from '../assets/transaction.svg'
-import { ReactComponent as Envelope } from '../assets/envelope.svg'
 import { ReactComponent as Invoice } from '../assets/invoice.svg'
 
 import './app.css'
@@ -31,7 +30,7 @@ const Main = ({ children }) => (
           top: '8px',
           left: '20px',
           width: 'auto',
-          height: '46px'
+          height: '46px',
         }}
       />
       <input className="menu-btn" type="checkbox" id="menu-btn" />
@@ -43,16 +42,19 @@ const Main = ({ children }) => (
           className="menu-transaction"
           onClick={() => navigate('/new/invoice')}
         >
-          <span className="btn-new" style={{
-              background: "#1E075F",
-              border: "1px solid white"
-            }}>
+          <span
+            className="btn-new"
+            style={{
+              background: '#1E075F',
+              border: '1px solid white',
+            }}
+          >
             <Invoice
               style={{
                 position: 'relative',
                 top: '7px',
                 height: '24px',
-                marginRight: '10px'
+                marginRight: '10px',
               }}
             />
             New Invoice
@@ -68,7 +70,7 @@ const Main = ({ children }) => (
                 position: 'relative',
                 top: '7px',
                 height: '24px',
-                marginRight: '10px'
+                marginRight: '10px',
               }}
             />
             New Payment
@@ -108,11 +110,11 @@ App.propTypes = {
   store: PropTypes.shape({}).isRequired,
 
   // Testing
-  testElement: PropTypes.element
+  testElement: PropTypes.element,
 }
 
 App.defaultProps = {
-  testElement: null
+  testElement: null,
 }
 
 export default App
