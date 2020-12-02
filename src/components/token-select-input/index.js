@@ -12,11 +12,11 @@ import './token-select-input.css'
 const TokenSelectInput = ({ tokens, onSubmit, stablecoins }) => {
   // Add ETH as the first option
   if (!tokens) tokens = []
-  if (!tokens[0] || tokens[0].name !== ETH.name)
-    tokens.unshift(ETH)
-
+  if (!tokens[0] || tokens[0].name !== ETH.name) tokens.unshift(ETH)
+  console.log('tokens', tokens)
   const [open, setModal] = useState(false)
   const [tokenIndex, setIndex] = useState(0)
+  const [customToken, setCustomToken] = useState()
 
   const updateSelectedToken = (tokenIndex, newToken) => {
     if (tokenIndex !== undefined) {
@@ -24,47 +24,47 @@ const TokenSelectInput = ({ tokens, onSubmit, stablecoins }) => {
     }
 
     if (newToken) {
-      tokens.push(newToken)
-      setIndex(tokens.length - 1)
-      onSubmit(tokens[tokens.length - 1])
+      setCustomToken(newToken)
+      onSubmit(newToken)
     } else {
+      setCustomToken(null)
       onSubmit(tokens[tokenIndex])
     }
 
     setModal(!open)
   }
 
+  const token = customToken || tokens[tokenIndex]
   return (
     <Field
       name="token"
       render={() => (
-          <div>
-            <Modal
-              open={open}
-              onClose={() => setModal(!open)}
-              center
-              classNames={{
-                modal: 'setToken-modal'
-              }}
-            >
-              <TokenSelectorBox
-                tokens={tokens}
-                tokenIndex={tokenIndex}
-                submit={updateSelectedToken}
-                stablecoins={stablecoins}
-              />
-            </Modal>
-            <div
-              className='TokenSelectInput'
-              onClick={() => setModal(!open)}
-            >
-              <img src={tokens[tokenIndex].symbolURI ? tokens[tokenIndex].symbolURI : warningSymbol} alt="token-symbol" />
-              { tokens[tokenIndex].ticker }
-              <img src={downArrow} className="down-arrow" alt="down-arrow" />
-            </div>
+        <div>
+          <Modal
+            open={open}
+            onClose={() => setModal(!open)}
+            center
+            classNames={{
+              modal: 'setToken-modal',
+            }}
+          >
+            <TokenSelectorBox
+              tokens={tokens}
+              tokenIndex={tokenIndex}
+              submit={updateSelectedToken}
+              stablecoins={stablecoins}
+            />
+          </Modal>
+          <div className="TokenSelectInput" onClick={() => setModal(!open)}>
+            <img
+              src={token.symbolURI ? token.symbolURI : warningSymbol}
+              alt="token-symbol"
+            />
+            {token.ticker}
+            <img src={downArrow} className="down-arrow" alt="down-arrow" />
           </div>
-        )
-      }
+        </div>
+      )}
     />
   )
 }
