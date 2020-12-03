@@ -39,7 +39,7 @@ export function* fetchTokens() {
     {
       name: 'Dollar on Chain',
       ticker: 'DOC',
-      address: '0xCb46C0DdC60d18eFEB0e586c17AF6Ea36452DaE0',
+      address: '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0',
     },
   ]
 
