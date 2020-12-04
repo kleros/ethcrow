@@ -536,7 +536,7 @@ function* fetchArbitrabletx({ payload: { arbitrable, id } }) {
 
   const arbitrationCost = yield call(
     arbitratorEth.methods.arbitrationCost(
-      arbitrableTransaction.arbitratorExtraData
+      arbitrableTransaction.arbitratorExtraData || '0x'
     ).call
   )
 
@@ -629,17 +629,21 @@ function* fetchArbitrabletx({ payload: { arbitrable, id } }) {
           )
         )
       }
-
       // Verify token attributes
-      const tokenQuery = yield call(
-        T2CRInstance.methods.queryTokens(
-          '0x0000000000000000000000000000000000000000000000000000000000000000',
-          1,
-          [false, true, false, false, false, false, false, false],
-          true,
-          _token.address
-        ).call
-      )
+      let tokenQuery
+      try {
+        tokenQuery = yield call(
+          T2CRInstance.methods.queryTokens(
+            '0x0000000000000000000000000000000000000000000000000000000000000000',
+            1,
+            [false, true, false, false, false, false, false, false],
+            true,
+            _token.address
+          ).call
+        )
+      } catch (err) {
+        tokenQuery = { values: [] }
+      }
 
       const tokenID = tokenQuery.values[0]
       // If token does not exist we have nothing to check against
@@ -658,9 +662,12 @@ function* fetchArbitrabletx({ payload: { arbitrable, id } }) {
       }
 
       // Verify token address
-      const item = yield call(
-        ERC20BadgeInstance.methods.getAddressInfo(_token.address).call
-      )
+      let item
+      try {
+        item = yield call(
+          ERC20BadgeInstance.methods.getAddressInfo(_token.address).call
+        )
+      } catch (err) {}
 
       if (!item || Number(item.status) !== 1 || !verified) {
         verified = false
