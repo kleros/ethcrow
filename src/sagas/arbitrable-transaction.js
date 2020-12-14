@@ -392,6 +392,7 @@ function* fetchArbitrabletxs() {
   const ALL_ARBITRABLE_ADDRESSES = ARBITRABLE_ADDRESSES.concat(
     ARBITRABLE_TOKEN_ADDRESSES
   )
+  console.log(ALL_ARBITRABLE_ADDRESSES)
 
   for (let arbitrableContract of ALL_ARBITRABLE_ADDRESSES) {
     multipleArbitrableTransactionEth = new web3.eth.Contract(
